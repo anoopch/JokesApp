@@ -1,0 +1,33 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.2'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+task appengineRunAndTest {
+    dependsOn = [":backend:appengineRun",":app:connectedAndroidTest"]
+
+    evaluationDependsOn ":backend"
+
+    project(":backend"){
+        appengine {
+            daemon true
+        }
+    }
+    finalizedBy{
+        ":backend:appengineStop"
+    }
+}
