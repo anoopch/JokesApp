@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity implements JokeFetcher.JokeF
             MobileAds.initialize(getApplicationContext(), "ca-app-pub-6045984529743136~7589463606");
             AdView mAdView = (AdView) findViewById(R.id.adView);
             AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
+            if (mAdView != null)
+                mAdView.loadAd(adRequest);
         } catch (Exception e) {
             e.printStackTrace();
         }
